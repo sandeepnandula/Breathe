@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
+<!-- above set at the top of the file will set     -->
+<!-- the browser's rendering engine into           -->
+<!-- "Quirks Mode". Replacing this declaration     -->
+<!-- with a "Standards Mode" doctype is supported, -->
+<!-- but may lead to some differences in layout.   -->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Breathe</title>
+<link rel="stylesheet" type="text/css" href="/css/cssstylesheet.css">
+</head>
+<body>
+
+	<h1>
+		Let's do Breathe! <a href="instructions.html"><img
+			src="/media/icon.png"></a>
+	</h1>
+	<div class="division">
+		<video id="myVideo" width="300px">
+			<source src="/media/loopvideo.mp4" />
+		</video>
+	</div>
+	<h2 id="element">59</h2>
+
+	<button onclick="control(this.value)" type="button" value="start"
+		id="btn"></button>
+	<button onclick="reset()" type="button">Reset</button>
+
+
+
+	<script>
+		if (navigator.userAgent.match(/.*Mac.*/) != null) {
+			console.info('you are on a mac');
+			document.body.style.backgroundColor = "#9CD7F3";
+		} else {
+			console.log('you are on something that is not a mac');
+			document.body.style.backgroundColor = "#88cff3";
+		}
+		
+		var btn_Name = "Start";
+		// 	    var btn_Name1="Stop";
+		var vid = document.getElementById("myVideo");
+		document.getElementById("btn").innerHTML = "Start";
+		vid.loop = false;
+		var c = 59;
+		var counterInterval;
+
+		function control(key) {
+			if (key == "start") {
+				playVid();
+				document.getElementById("btn").innerHTML = "Pause";
+				btn.value = "Pause";
+			}
+			if (key == "Pause") {
+				pauseVid();
+				document.getElementById("btn").innerHTML = "Start";
+				btn.value = "start";
+			}
+		}
+		function playVid() {
+
+			if (!counterInterval) {
+				vid.loop = true;
+				vid.play();
+				counterInterval = setInterval(count, 1000);
+
+			}
+
+			function count() {
+				c--;
+				document.getElementById("element").innerHTML = +c;
+				if (c == 0) {
+
+					reset();
+					document.getElementById("btn").innerHTML = "Start";
+
+				}
+
+			}
+
+		}
+
+		function pauseVid() {
+			vid.pause();
+			clearInterval(counterInterval);
+			counterInterval = null;
+		}
+		function reset() {
+			//vid.load(); changes made
+			vid.load(); //changes made
+			c = 59;
+			document.getElementById("element").innerHTML = +c;
+			clearInterval(counterInterval);
+			counterInterval = null; //changes made
+			btn.value = "start";
+			document.getElementById("btn").innerHTML = "Start";
+		}
+	</script>
+
+</body>
+</html>
